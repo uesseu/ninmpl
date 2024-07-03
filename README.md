@@ -78,7 +78,7 @@ and set self.gridspec variable in it.
 >>>         self.fig.set_figheight(5)
 >>>         self.gridspec = plt.GridSpec(2, 4, hspace=0.4)
 >>>         self.gridspec.set_height_ratios([1, 2])
-"""
+```
 
 # Example
 ```python
