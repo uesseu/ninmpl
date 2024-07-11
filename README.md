@@ -116,7 +116,7 @@ line2 = [[1, 1], [3, 4]]
 line2 = [[1, 1], [3, 4], [8, 9]]
 
 gridspec = plt.GridSpec(2, 4, hspace=0.4)
-with NinFigure(gridspec) as nf:
+with NinFigure(gridspec=gridspec) as nf:
     nf[0, 0] = PlotAngle(r, theta)
     nf[1, 0] = PlotLine(line, 'Line')
     nf[0, 1:3] = PlotLine(line2, 'Line2')
