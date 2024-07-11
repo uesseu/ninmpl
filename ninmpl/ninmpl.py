@@ -1,6 +1,6 @@
 """ ninplot
 Simple matplotlib context manager package.
-It based on OOP, especially inheritance.
+It force you OOP, especially inheritance.
 
 >>> from ninplot import FigureBase, AxesBase
 >>> class PlotAngle(AxesBase):
@@ -139,6 +139,9 @@ class FigureBase:
         Show figure or not.
     filename: Optional[str]
         If it is not None, file will be saved.
+    gridspec: Optional[matplotlib.pyplot.GridSpec]
+        GridSpec to use.
+        Default is a GridSpec to make 1 axes.
 
     >>> class NinFigure(FigureBase):
     >>>     def adjust(self):
@@ -148,20 +151,22 @@ class FigureBase:
     >>>         self.gridspec.set_height_ratios([1, 2])
     """
 
-    def __init__(self, show=True, filename: Optional[str] = None):
+    def __init__(self, show=True, filename: Optional[str] = None,
+                 gridspec: Optional[plt.GridSpec] = plt.GridSpec(1, 1)):
         self.fig = plt.figure()
         self.show = show
         self.filename = filename
         self.plots = {}
+        self.gridspec = gridspec
         self.adjust()
         self.used = set()
 
     @abc.abstractmethod
     def adjust(self):
         """
-        Please set self.gridspec.
+        Please write code to adjust figure.
         """
-        self.gridspec = plt.GridSpec(1, 1)
+        pass
 
     def __getitem__(self, place) -> AxesBase:
         return self.plots[*(range_as_int(x) for x in place)]
