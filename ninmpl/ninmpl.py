@@ -41,6 +41,7 @@ from matplotlib import pyplot as plt
 class SamePlaceException(Exception):
     pass
 
+
 def range_as_int(x) -> tuple[int, int]:
     if isinstance(x, int):
         return (x, x + 1)
@@ -48,6 +49,7 @@ def range_as_int(x) -> tuple[int, int]:
         return (x.start, x.stop)
     else:
         raise TypeError('Not int or slice')
+
 
 def get_points(y, x):
     return itertools.product(range())
