@@ -154,7 +154,8 @@ class FigureBase:
     """
 
     def __init__(self, show=True, filename: Optional[str] = None,
-                 gridspec: Optional[plt.GridSpec] = plt.GridSpec(1, 1)):
+                 gridspec: Optional[plt.GridSpec] = plt.GridSpec(1, 1),
+                 auto_clear: bool = False):
         self.fig = plt.figure()
         self.show = show
         self.filename = filename
@@ -162,6 +163,7 @@ class FigureBase:
         self.gridspec = gridspec
         self.adjust()
         self.used = set()
+        self.auto_clear = auto_clear
 
     @abc.abstractmethod
     def adjust(self):
@@ -194,4 +196,5 @@ class FigureBase:
             plt.show()
         if self.filename is not None:
             self.fig.savefig(self.filename)
-        self.fig.clear()
+        if self.auto_clear:
+            self.fig.clear()
